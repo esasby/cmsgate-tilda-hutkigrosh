@@ -1,0 +1,35 @@
+{
+  "name": "esas/cmsgate-tilda-hutkigrosh",
+  "description": "Drupal payment gateway integration for Tilda",
+  "keywords": [
+    "cmsgate",
+    "esas",
+    "payment gateway",
+    "tilda",
+    "hutkigrosh",
+    "erip",
+    "api"
+  ],
+  "require": {
+    "php": ">= 5.6.0",
+    "esas/cmsgate-hutkigrosh-lib": "~v1.16.3",
+    "esas/cmsgate-tilda-lib": "~v1.16.0"
+
+  },
+  "authors": [
+    {
+      "name": "esas",
+      "email": "support@hutkigrosh.com",
+      "homepage": "https://hutkigrosh.by"
+    }
+  ],
+  "config": {
+    "vendor-dir": "src/cmsgate-tilda-hutkigrosh/vendor"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Esas\\Hutkigrosh\\": ""
+    }
+  }
+}
