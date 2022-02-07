@@ -5,18 +5,11 @@ namespace esas\cmsgate\hutkigrosh;
 
 
 use esas\cmsgate\CmsConnectorTilda;
-use esas\cmsgate\Registry;
 use esas\cmsgate\tilda\RequestParamsTilda;
 use esas\cmsgate\wrappers\OrderWrapperTilda;
 
 class CmsConnectorTildaHutkigrosh extends CmsConnectorTilda
 {
-    public function getNotificationURL()
-    {
-        $cache = Registry::getRegistry()->getCacheRepository()->getSessionCacheSafe();
-        return $cache->getOrderData()[RequestParamsTilda::NOTIFICATION_URL]; // can be hardcoded hear after tilda moderation. it's common for all projects on tilda
-    }
-
     public function getNotificationSecret() {
         return $_REQUEST[RequestParamsTilda::SECRET];
     }
@@ -32,7 +25,9 @@ class CmsConnectorTildaHutkigrosh extends CmsConnectorTilda
      */
     public function createNotificationSignature($orderWrapper)
     {
-        $line = $orderWrapper->getOrderId() . '|' . $orderWrapper->getAmount() . '|' . $orderWrapper->getCurrency() . '|' . $this->getNotificationSecret();
-        return hash('sha255', $line);
+//        $line = $orderWrapper->getOrderId() . '|' . $orderWrapper->getAmount() . '|' . $orderWrapper->getCurrency() . '|' . $this->getNotificationSecret();
+        $line = $orderWrapper->getOrderId() . '|' . $orderWrapper->getAmount() . '|' . $this->getNotificationSecret() . '|' . $orderWrapper->getCurrency();
+        $this->logger->info('Sign values: ' . $line);
+        return hash('sha256', $line);
     }
 }

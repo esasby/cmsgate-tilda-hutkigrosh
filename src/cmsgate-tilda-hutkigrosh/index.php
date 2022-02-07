@@ -8,6 +8,7 @@ use esas\cmsgate\hutkigrosh\RegistryHutkigroshTilda;
 use esas\cmsgate\hutkigrosh\utils\RequestParamsHutkigrosh;
 use esas\cmsgate\Registry;
 use esas\cmsgate\tilda\RequestParamsTilda;
+use esas\cmsgate\utils\JSONUtils;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\utils\StringUtils;
 use esas\cmsgate\utils\Logger as LoggerCms;
@@ -22,6 +23,7 @@ const PATH_BILL_ALFACLICK = '/bill/alfaclick';
 
 $logger = LoggerCms::getLogger('index');
 try {
+    $logger->info('Got request from Tilda: ' . JSONUtils::encodeArrayAndMask($_REQUEST, ["ps_hg_password"]));
     switch ($request) {
         case StringUtils::endsWith($request, PATH_BILL_ADD):
             // приходится сохрянть заказ где-то в кэше, для возможнсоти повторного отображения страницы в случае возврата с webpay

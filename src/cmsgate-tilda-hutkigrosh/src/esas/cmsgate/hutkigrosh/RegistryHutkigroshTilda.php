@@ -9,13 +9,11 @@
 namespace esas\cmsgate\hutkigrosh;
 
 use esas\cmsgate\cache\CacheRepository;
-use esas\cmsgate\cache\CacheRepositoryPDO;
-use esas\cmsgate\CmsConnectorTilda;
+use esas\cmsgate\cache\CacheRepositoryPDOCrypto;
 use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\descriptors\VendorDescriptor;
 use esas\cmsgate\descriptors\VersionDescriptor;
 use esas\cmsgate\hutkigrosh\view\client\CompletionPageHutkigrosh;
-use esas\cmsgate\hutkigrosh\view\client\CompletionPageHutkigroshTilda;
 use esas\cmsgate\hutkigrosh\view\client\CompletionPanelHutkigroshTilda;
 use esas\cmsgate\tilda\RequestParamsTilda;
 use esas\cmsgate\utils\CMSGateException;
@@ -98,7 +96,11 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
      */
     public function createCacheRepository()
     {
-        return new CacheRepositoryPDO("mysql:host=127.0.0.1;dbname=cmsgate_cache_tilda;charset=utf8", 'username', 'password');
+        return new CacheRepositoryPDOCrypto(
+            "mysql:host=127.0.0.1;dbname=cmsgate;charset=utf8",
+            'user',
+            'password',
+            'tilda_hutkigrosh_cache');
     }
 
     public function createHooks()
