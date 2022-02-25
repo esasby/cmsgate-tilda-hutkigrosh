@@ -8,8 +8,7 @@
 
 namespace esas\cmsgate\hutkigrosh;
 
-use esas\cmsgate\cache\CacheRepository;
-use esas\cmsgate\cache\CacheRepositoryPDOCrypto;
+use esas\cmsgate\CmsConnectorTilda;
 use esas\cmsgate\descriptors\ModuleDescriptor;
 use esas\cmsgate\descriptors\VendorDescriptor;
 use esas\cmsgate\descriptors\VersionDescriptor;
@@ -19,13 +18,14 @@ use esas\cmsgate\tilda\RequestParamsTilda;
 use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\utils\URLUtils;
-use Exception;
+use esas\cmsgate\view\admin\AdminViewFields;
+use esas\cmsgate\view\admin\ConfigFormCloud;
 
 class RegistryHutkigroshTilda extends RegistryHutkigrosh
 {
     public function __construct()
     {
-        $this->cmsConnector = new CmsConnectorTildaHutkigrosh();
+        $this->cmsConnector = new CmsConnectorTilda();
         $this->paysystemConnector = new PaysystemConnectorHutkigrosh();
     }
 
@@ -44,7 +44,26 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
      */
     public function createConfigForm()
     {
-        throw new Exception('Not implemented');
+        $managedFields = $this->getManagedFieldsFactory()->getManagedFieldsOnly(AdminViewFields::CONFIG_FORM_COMMON, [
+            ConfigFieldsHutkigrosh::eripId(),
+            ConfigFieldsHutkigrosh::eripPath(),
+            ConfigFieldsHutkigrosh::eripTreeId(),
+            ConfigFieldsHutkigrosh::sandbox(),
+            ConfigFieldsHutkigrosh::completionText(),
+            ConfigFieldsHutkigrosh::dueInterval(),
+            ConfigFieldsHutkigrosh::instructionsSection(),
+            ConfigFieldsHutkigrosh::qrcodeSection(),
+            ConfigFieldsHutkigrosh::webpaySection(),
+            ConfigFieldsHutkigrosh::notificationEmail(),
+            ConfigFieldsHutkigrosh::notificationSms(),
+            ]);
+        $configForm = new ConfigFormCloud(
+            $managedFields,
+            AdminViewFields::CONFIG_FORM_COMMON,
+            null,
+            ''
+        );
+        return $configForm;
     }
 
 
@@ -67,9 +86,9 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
     public function createModuleDescriptor()
     {
         return new ModuleDescriptor(
-            "commerce-tilda-hutkigrosh", // код должен совпадать с кодом решения в маркете (@id в Plugin\Commerce\PaymentGateway\xxx.php)
+            "tilda-hutkigrosh",
             new VersionDescriptor("1.16.0", "2022-01-12"),
-            "Прием платежей через ЕРИП (сервис Hutkigrosh)",
+            "Tilda Hutkigrosh",
             "https://bitbucket.org/esasby/cmsgate-tilda-hutkigrosh/src/master/",
             VendorDescriptor::esas(),
             "Выставление пользовательских счетов в ЕРИП"
@@ -89,18 +108,6 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
     public function getCompletionPage($orderWrapper, $completionPanel)
     {
         return new CompletionPageHutkigrosh($orderWrapper, $completionPanel);
-    }
-
-    /**
-     * @return CacheRepository
-     */
-    public function createCacheRepository()
-    {
-        return new CacheRepositoryPDOCrypto(
-            "mysql:host=127.0.0.1;dbname=cmsgate;charset=utf8",
-            'user',
-            'password',
-            'tilda_hutkigrosh_cache');
     }
 
     public function createHooks()
