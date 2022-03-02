@@ -9,6 +9,7 @@ use esas\cmsgate\security\ApiAuthServiceTilda;
 use esas\cmsgate\tilda\RequestParamsTilda;
 use esas\cmsgate\view\admin\AdminConfigPage;
 use esas\cmsgate\view\admin\AdminLoginPage;
+use esas\cmsgate\security\AuthConfigMapper;
 use PDO;
 
 class CloudRegistryHutkigroshTilda extends CloudRegistryPDO
@@ -30,8 +31,6 @@ class CloudRegistryHutkigroshTilda extends CloudRegistryPDO
     protected function createApiAuthService()
     {
         return new ApiAuthServiceTilda(
-            ConfigFieldsHutkigrosh::login(),
-            ConfigFieldsHutkigrosh::password(),
             RequestParamsTilda::SIGNATURE);
     }
 
@@ -51,4 +50,10 @@ class CloudRegistryHutkigroshTilda extends CloudRegistryPDO
     }
 
 
+    public function createAuthConfigMapper()
+    {
+        return new AuthConfigMapper(
+            ConfigFieldsHutkigrosh::login(),
+            ConfigFieldsHutkigrosh::password());
+    }
 }

@@ -15,6 +15,7 @@ use esas\cmsgate\descriptors\VersionDescriptor;
 use esas\cmsgate\hutkigrosh\view\client\CompletionPageHutkigrosh;
 use esas\cmsgate\hutkigrosh\view\client\CompletionPanelHutkigroshTilda;
 use esas\cmsgate\tilda\RequestParamsTilda;
+use esas\cmsgate\utils\CloudSessionUtils;
 use esas\cmsgate\utils\CMSGateException;
 use esas\cmsgate\utils\SessionUtils;
 use esas\cmsgate\utils\URLUtils;
@@ -78,7 +79,8 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
         $currentURL = URLUtils::getCurrentURLNoParams();
         $currentURL = str_replace(PATH_BILL_ADD, PATH_BILL_VIEW, $currentURL);
         if (strpos($currentURL, PATH_BILL_VIEW) !== false)
-            return $currentURL . '?' . RequestParamsTilda::ORDER_ID . '=' . SessionUtils::getCacheUUID();
+            return $currentURL
+                . '?' . RequestParamsTilda::ORDER_ID . '=' . CloudSessionUtils::getOrderCacheUUID();
         else
             throw new CMSGateException('Incorrect URL genearation');
     }

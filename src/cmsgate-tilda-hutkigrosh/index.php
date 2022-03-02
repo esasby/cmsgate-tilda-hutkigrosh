@@ -4,6 +4,7 @@ use esas\cmsgate\CloudRegistry;
 use esas\cmsgate\controllers\ControllerCloudConfig;
 use esas\cmsgate\controllers\ControllerCloudLogin;
 use esas\cmsgate\controllers\ControllerCloudLogout;
+use esas\cmsgate\controllers\ControllerCloudSecretGenerate;
 use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshAddBill;
 use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshAlfaclick;
 use esas\cmsgate\hutkigrosh\controllers\ControllerHutkigroshCompletionPage;
@@ -22,6 +23,7 @@ require_once((dirname(__FILE__)) . '/src/init.php');
 
 $request = $_SERVER['REDIRECT_URL'];
 const PATH_CONFIG = '/config';
+const PATH_CONFIG_SECRET_NEW = '/config/secret/new';
 const PATH_CONFIG_LOGIN = '/config/login';
 const PATH_CONFIG_LOGOUT = '/config/logout';
 const PATH_BILL_ADD = '/api/bill/add';
@@ -86,6 +88,9 @@ if (strpos($request, 'api') !== false) {
         $controller->process();
     } elseif (StringUtils::endsWith($request, PATH_CONFIG_LOGOUT)) {
         $controller = new ControllerCloudLogout();
+        $controller->process();
+    } elseif (StringUtils::endsWith($request, PATH_CONFIG_SECRET_NEW)) {
+        $controller = new ControllerCloudSecretGenerate();
         $controller->process();
     } elseif (StringUtils::endsWith($request, PATH_CONFIG)) {
         $controller = new ControllerCloudConfig();
