@@ -6,6 +6,7 @@ namespace esas\cmsgate\hutkigrosh;
 
 use esas\cmsgate\CloudRegistryPDO;
 use esas\cmsgate\security\ApiAuthServiceTilda;
+use esas\cmsgate\security\CryptServiceImpl;
 use esas\cmsgate\tilda\RequestParamsTilda;
 use esas\cmsgate\view\admin\AdminConfigPage;
 use esas\cmsgate\view\admin\AdminLoginPage;
@@ -47,6 +48,11 @@ class CloudRegistryHutkigroshTilda extends CloudRegistryPDO
     public function isSandbox()
     {
         return true;
+    }
+
+    protected function createCryptService()
+    {
+        return new CryptServiceImpl('/opt/cmsgate/storage');
     }
 
 

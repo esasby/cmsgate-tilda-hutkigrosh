@@ -96,7 +96,7 @@ if (strpos($request, 'api') !== false) {
         $controller = new ControllerCloudConfig();
         $controller->process();
     } else {
-        RedirectUtilsCloud::loginPage(true);
+        http_response_code(404);
     }
 }
 

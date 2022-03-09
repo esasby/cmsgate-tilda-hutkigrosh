@@ -49,7 +49,6 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
             ConfigFieldsHutkigrosh::eripId(),
             ConfigFieldsHutkigrosh::eripPath(),
             ConfigFieldsHutkigrosh::eripTreeId(),
-            ConfigFieldsHutkigrosh::sandbox(),
             ConfigFieldsHutkigrosh::completionText(),
             ConfigFieldsHutkigrosh::dueInterval(),
             ConfigFieldsHutkigrosh::instructionsSection(),
@@ -89,7 +88,7 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
     {
         return new ModuleDescriptor(
             "tilda-hutkigrosh",
-            new VersionDescriptor("1.16.0", "2022-01-12"),
+            new VersionDescriptor("1.17.0", "2022-03-09"),
             "Tilda Hutkigrosh",
             "https://bitbucket.org/esasby/cmsgate-tilda-hutkigrosh/src/master/",
             VendorDescriptor::esas(),
