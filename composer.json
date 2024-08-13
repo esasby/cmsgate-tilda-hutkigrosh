@@ -12,10 +12,10 @@
   ],
   "require": {
     "php": ">= 5.6.0",
-    "esas/cmsgate-hutkigrosh-lib": "~v1.17.1",
-    "esas/cmsgate-tilda-lib": "~v1.17.2",
-    "esas/cmsgate-core": "~v1.17.3",
-    "esas/cmsgate-cloud-lib": "~v1.17.3",
+    "esas/cmsgate-hutkigrosh-lib": "~v2.0.4",
+    "esas/cmsgate-tilda-lib": "~v2.0.2",
+    "esas/cmsgate-core": "~v2.2.10",
+    "esas/cmsgate-bridge-lib": "~v2.2.3",
     "ext-pdo": "*"
   },
   "authors": [

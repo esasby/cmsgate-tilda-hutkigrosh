@@ -10,7 +10,7 @@ const CONFIG_SANDBOX = 'sandbox';
 
 return array(
     CONFIG_PDO_DSN => "mysql:host=127.0.0.1;dbname=cmsgate;charset=utf8",
-    CONFIG_PDO_USERNAME => 'username',
-    CONFIG_PDO_PASSWORD   => 'password',
-    CONFIG_SANDBOX   => false,
+    CONFIG_PDO_USERNAME => 'root',
+    CONFIG_PDO_PASSWORD => '',
+    CONFIG_SANDBOX => true,
 );

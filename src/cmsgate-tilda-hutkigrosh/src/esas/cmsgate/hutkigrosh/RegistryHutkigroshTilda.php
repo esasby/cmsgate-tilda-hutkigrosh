@@ -87,7 +87,7 @@ class RegistryHutkigroshTilda extends RegistryHutkigrosh
     public function createModuleDescriptor()
     {
         return new ModuleDescriptor(
-            "tilda-hutkigrosh",
+            "hutkigrosh",
             new VersionDescriptor("1.17.0", "2022-03-09"),
             "Tilda Hutkigrosh",
             "https://bitbucket.org/esasby/cmsgate-tilda-hutkigrosh/src/master/",
